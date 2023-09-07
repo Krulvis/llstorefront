@@ -17,10 +17,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${product.title} | Acme Store`,
+    title: `${product.title} | Limit Latex`,
     description: `${product.title}`,
     openGraph: {
-      title: `${product.title} | Acme Store`,
+      title: `${product.title} | Limit Latex`,
       description: `${product.title}`,
       images: product.thumbnail ? [product.thumbnail] : [],
     },

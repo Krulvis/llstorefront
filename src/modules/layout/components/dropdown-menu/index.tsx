@@ -1,6 +1,6 @@
 import { Popover, Transition } from "@headlessui/react"
 import {
-  useFeaturedProductsQuery,
+  useFeaturedProductsQuery, useNavigationCategories,
   useNavigationCollections,
 } from "@lib/hooks/use-layout-data"
 import repeat from "@lib/util/repeat"
@@ -17,6 +17,8 @@ const DropdownMenu = () => {
   const { push } = useRouter()
   const { data: collections, isLoading: loadingCollections } =
     useNavigationCollections()
+  const { data: categories, isLoading: loadingCategories } =
+      useNavigationCategories()
   const { data: products, isLoading: loadingProducts } =
     useFeaturedProductsQuery()
 
@@ -58,27 +60,27 @@ const DropdownMenu = () => {
                   <div className="flex items-start content-container">
                     <div className="flex flex-col flex-1 max-w-[30%]">
                       <h3 className="text-base-semi text-gray-900 mb-4">
-                        Collections
+                        Categories
                       </h3>
                       <div className="flex items-start">
-                        {collections &&
-                          chunk(collections, 6).map((chunk, index) => {
+                        {categories &&
+                          chunk(categories, 6).map((chunk, index) => {
                             return (
                               <ul
                                 key={index}
                                 className="min-w-[152px] max-w-[200px] pr-4"
                               >
-                                {chunk.map((collection) => {
+                                {chunk.map((category) => {
                                   return (
                                     <div
-                                      key={collection.handle}
+                                      key={category.handle}
                                       className="pb-3"
                                     >
                                       <Link
-                                        href={`/collections/${collection.handle}`}
+                                        href={`/categories/${category.handle}`}
                                         onClick={() => setOpen(false)}
                                       >
-                                        {collection.title}
+                                        {category.name}
                                       </Link>
                                     </div>
                                   )
@@ -86,7 +88,7 @@ const DropdownMenu = () => {
                               </ul>
                             )
                           })}
-                        {loadingCollections &&
+                        {loadingCategories &&
                           repeat(6).map((index) => (
                             <div
                               key={index}
@@ -95,23 +97,63 @@ const DropdownMenu = () => {
                           ))}
                       </div>
                     </div>
-                    <div className="flex-1">
-                      <div className="grid grid-cols-3 gap-4">
-                        {products?.slice(0, 3).map((product) => (
-                          <ProductPreview {...product} key={product.id} />
-                        ))}
-                        {loadingProducts &&
-                          repeat(3).map((index) => (
-                            <SkeletonProductPreview key={index} />
-                          ))}
+                    <div className="flex flex-col flex-1 max-w-[30%]">
+                      <h3 className="text-base-semi text-gray-900 mb-4">
+                        Collections
+                      </h3>
+                      <div className="flex items-start">
+                        {collections &&
+                            chunk(collections, 6).map((chunk, index) => {
+                              return (
+                                  <ul
+                                      key={index}
+                                      className="min-w-[152px] max-w-[200px] pr-4"
+                                  >
+                                    {chunk.map((collection) => {
+                                      return (
+                                          <div
+                                              key={collection.handle}
+                                              className="pb-3"
+                                          >
+                                            <Link
+                                                href={`/collection/${collection.handle}`}
+                                                onClick={() => setOpen(false)}
+                                            >
+                                              {collection.title}
+                                            </Link>
+                                          </div>
+                                      )
+                                    })}
+                                  </ul>
+                              )
+                            })}
+                        {loadingCollections &&
+                            repeat(6).map((index) => (
+                                <div
+                                    key={index}
+                                    className="w-12 h-4 bg-gray-100 animate-pulse"
+                                />
+                            ))}
                       </div>
                     </div>
+                    {/*<div className="flex-1">*/}
+                    {/*  <div className="grid grid-cols-3 gap-4">*/}
+                    {/*    {products?.slice(0, 3).map((product) => (*/}
+                    {/*      <ProductPreview {...product} key={product.id} />*/}
+                    {/*    ))}*/}
+                    {/*    {loadingProducts &&*/}
+                    {/*      repeat(3).map((index) => (*/}
+                    {/*        <SkeletonProductPreview key={index} />*/}
+                    {/*      ))}*/}
+                    {/*  </div>*/}
+                    {/*</div>*/}
                   </div>
                 </div>
               </Popover.Panel>
             </Transition>
           </>
         </Popover>
+
       </div>
     </div>
   )

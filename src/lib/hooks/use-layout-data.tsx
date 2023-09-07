@@ -1,6 +1,7 @@
-import { getProductsList, getCollectionsList } from "@lib/data"
+import {getProductsList, getCollectionsList, getCategoryList} from "@lib/data"
 import { getPercentageDiff } from "@lib/util/get-precentage-diff"
-import { ProductCollection, Region } from "@medusajs/medusa"
+import { useProductCategories } from "medusa-react"
+import { ProductCollection, ProductCategory, Region } from "@medusajs/medusa"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { useQuery } from "@tanstack/react-query"
 import { formatAmount, useCart } from "medusa-react"
@@ -10,6 +11,12 @@ import { CalculatedVariant } from "types/medusa"
 type LayoutCollection = {
   handle: string
   title: string
+}
+
+type LayoutCategory = {
+    name: string
+    description: string
+    handle: string
 }
 
 const fetchCollectionData = async (): Promise<LayoutCollection[]> => {
@@ -45,6 +52,42 @@ export const useNavigationCollections = () => {
   })
 
   return queryResults
+}
+
+const fetchCategoriesData = async (): Promise<LayoutCategory[]> => {
+    let categories: ProductCategory[] = []
+    let offset = 0
+    let count = 1
+
+    do {
+        await getCategoryList(offset)
+            .then((res) => res)
+            .then(({ product_categories: newCategories, count: newCount }) => {
+                categories = [...categories, ...newCategories]
+                count = newCount
+                offset = categories.length
+            })
+            .catch((_) => {
+                count = 0
+            })
+    } while (categories.length < count)
+
+    return categories.map((c) => ({
+        name: c.name,
+        description: c.description,
+        handle: c.handle,
+    }))
+}
+
+export const useNavigationCategories = () => {
+    const queryResults = useQuery({
+        queryFn: fetchCategoriesData,
+        queryKey: ["navigation_categories"],
+        staleTime: Infinity,
+        refetchOnWindowFocus: false,
+    })
+
+    return queryResults
 }
 
 const fetchFeaturedProducts = async (

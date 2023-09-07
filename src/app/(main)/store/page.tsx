@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import StoreTemplate from "@modules/store/templates"
 
 export const metadata: Metadata = {
-  title: "Store",
+  title: "Store | Limit Latex",
   description: "Explore all of our products.",
 }
 

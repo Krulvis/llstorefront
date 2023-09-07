@@ -237,3 +237,48 @@ export async function getProductsByCollectionHandle({
     nextPage,
   }
 }
+
+/**
+ * Fetches a list of categories, using the Medusa API or the Medusa Product Module, depending on the feature flag.
+ * @param offset (number) - The offset of the categories to retrieve (default: 0)
+ * @returns product_categories (array) - An array of categories
+ * @returns count (number) - The total number of categories
+ */
+export async function getCategoryList(offset: number = 0) {
+  if (PRODUCT_MODULE_ENABLED) {
+    DEBUG && console.log("PRODUCT_MODULE_ENABLED")
+    const { product_categories, count } = await fetch(
+        `${API_BASE_URL}/api/categories?offset=${offset}`,
+        {
+          next: {
+            tags: ["categories"],
+          },
+        }
+    )
+        .then((res) => res.json())
+        .catch((err) => {
+          throw err
+        })
+
+    return {
+      product_categories,
+      count,
+    }
+  }
+
+  DEBUG && console.log("PRODUCT_MODULE_DISABLED")
+  const { product_categories, count } = await medusaRequest("GET", "/product-categories", {
+    query: {
+      offset,
+    },
+  })
+      .then((res) => res.body)
+      .catch((err) => {
+        throw err
+      })
+
+  return {
+    product_categories,
+    count,
+  }
+}
