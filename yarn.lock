@@ -3949,6 +3949,11 @@ inquirer@^8.0.0:
     through "^2.3.6"
     wrap-ansi "^7.0.0"
 
+instafeed.js@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/instafeed.js/-/instafeed.js-2.0.0.tgz#7cf46ad6fe6addf8a71cc984e2c9b3d27190fed2"
+  integrity sha512-k7khLgozabWoUNoZtU1UV5+hTyYI+hJJi7GosWV0TFp7xaT+buL7eNt6utN7Af+3TeMGHc59DFrcXddtS+X0qw==
+
 instantsearch.js@4.56.0:
   version "4.56.0"
   resolved "https://registry.npmjs.org/instantsearch.js/-/instantsearch.js-4.56.0.tgz"
