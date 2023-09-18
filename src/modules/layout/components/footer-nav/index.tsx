@@ -4,19 +4,27 @@ import clsx from "clsx"
 import { useCollections } from "medusa-react"
 import Link from "next/link"
 import CountrySelect from "../country-select"
+import Image from "next/image";
 
 const FooterNav = () => {
   const { collections } = useCollections()
 
   return (
-    <div className="content-container flex flex-col gap-y-8 pt-16 pb-2">
+    <div className="content-container flex flex-col gap-y-8 pb-2">
       <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between">
-        <div>
-          <Link href="/" className="text-xl-semi uppercase">
-            Limit Latex
-          </Link>
-        </div>
-        <div className="text-small-regular grid grid-cols-2 gap-x-16">
+        <Link href="/" className="text-xl-semi uppercase">
+          <Image
+              src="/logo_trans.png"
+              loading="eager"
+              alt="Logo by Studio Stumpel"
+              priority={true}
+              width={300}
+              height={54}
+              sizes="(max-height: 50px)"
+              style={{objectFit: "contain"}}
+          />
+        </Link>
+        <div className="text-small-regular grid grid-cols-2 pt-16 gap-x-16">
           <div className="flex flex-col gap-y-2">
             <span className="text-base-semi">Collections</span>
             <ul
