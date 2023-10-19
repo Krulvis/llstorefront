@@ -1,6 +1,6 @@
 import { CheckoutProvider } from "@lib/context/checkout-context"
 import ChevronDown from "@modules/common/icons/chevron-down"
-import MedusaCTA from "@modules/layout/components/medusa-cta"
+// import MedusaCTA from "@modules/layout/components/medusa-cta"
 import Link from "next/link"
 import CheckoutLoader from "../components/checkout-loader"
 import CheckoutForm from "./checkout-form"
@@ -37,9 +37,9 @@ const CheckoutTemplate = () => {
             <CheckoutSummary />
           </div>
         </div>
-        <div className="py-4 w-full flex items-center justify-center">
-          <MedusaCTA />
-        </div>
+        {/*<div className="py-4 w-full flex items-center justify-center">*/}
+        {/*  <MedusaCTA />*/}
+        {/*</div>*/}
       </div>
     </CheckoutProvider>
   )

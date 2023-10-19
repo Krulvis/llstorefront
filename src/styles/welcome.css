@@ -1,0 +1,22 @@
+/* CenteredImagePage.css */
+
+.welcome-logo {
+    filter: url(#distortion-filter);
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Apply the ripple animation to an image */
+.image-with-ripple {
+    animation: ripple 2s infinite;
+}

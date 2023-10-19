@@ -6,11 +6,11 @@ export default function PageLayout({
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <>
-      <Nav />
-      {children}
-      <Footer />
-    </>
-  )
+        return (
+            <>
+                <Nav />
+                {children}
+                <Footer />
+            </>
+        )
 }

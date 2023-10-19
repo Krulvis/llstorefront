@@ -24,7 +24,17 @@ const FooterNav = () => {
               style={{objectFit: "contain"}}
           />
         </Link>
-        <div className="text-small-regular grid grid-cols-2 pt-16 gap-x-16">
+        <div className="text-small-regular grid grid-cols-3 pt-16 gap-x-16">
+          <div className="flex flex-col gap-y-2">
+            <a href="https://www.instagram.com/latex_fantasies/">
+            <Image
+                src="/insta-icon.webp"
+                alt={"Instagram Icon"}
+                width={50}
+                height={50}
+            ></Image>
+            </a>
+          </div>
           <div className="flex flex-col gap-y-2">
             <span className="text-base-semi">Collections</span>
             <ul
